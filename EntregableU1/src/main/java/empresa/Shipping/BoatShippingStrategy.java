@@ -1,0 +1,27 @@
+package empresa.Shipping;
+
+public class BoatShippingStrategy implements IShippingStrategy{
+    @Override
+    public double calculateCost(double weight, double dimensiones, Coordinates coordinatesOrigin, Coordinates coordinatesDestiny) {
+        double totalCost=25000;
+        if(weight>300){
+            totalCost=totalCost*1.3;
+        }else{
+            totalCost=totalCost*1.1;
+        }
+
+        if(dimensiones<5000){
+            totalCost=totalCost*1.2;
+        }else{totalCost=totalCost*1.5;}
+        DistanceCalculator calculator = new DistanceCalculator();
+        if(calculator.distanceInKilometers(coordinatesOrigin,coordinatesDestiny)>1000){
+            totalCost+=10000;
+        } else if (calculator.distanceInKilometers(coordinatesOrigin,coordinatesDestiny)>5000) {
+            totalCost+=15000;
+        }else {
+            totalCost+=20000;
+        }
+
+        return totalCost;
+    }
+}
