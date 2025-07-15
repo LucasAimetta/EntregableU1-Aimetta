@@ -3,11 +3,15 @@ package empresa.Payment;
 public class MercadoPagoPaymentGateway implements IPaymentGateway{
     @Override
     public boolean capture() {
-        return false;
+        return true;
     }
 
     @Override
-    public boolean autorize() {
-        return false;
+    public boolean authorize(double amount) {
+        if(amount<100 || amount>1000000){
+            return false;
+        }
+        return true;
+
     }
 }

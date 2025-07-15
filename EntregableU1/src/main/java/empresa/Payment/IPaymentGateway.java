@@ -2,6 +2,6 @@ package empresa.Payment;
 
 public interface IPaymentGateway {
      boolean capture();
-     boolean autorize();
+     boolean authorize(double amount);
 
 }

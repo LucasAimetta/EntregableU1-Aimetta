@@ -1,11 +1,21 @@
 package empresa.Payment;
 
 public abstract class PaymentProcessor {
-    private IPaymentGateway paymentGateway;
-    private boolean processPayment(){
-        return  false;
+    public IPaymentGateway paymentGateway;
+
+    public PaymentProcessor(IPaymentGateway paymentGateway) {
+        this.paymentGateway = paymentGateway;
     }
-    private boolean refundPayment(){
-        return  false;}
+
+    public abstract boolean processPayment(double amount);
+    public abstract boolean refundPayment(double amount);
+
+    public IPaymentGateway getPaymentGateway() {
+        return paymentGateway;
+    }
+
+    public void setPaymentGateway(IPaymentGateway paymentGateway) {
+        this.paymentGateway = paymentGateway;
+    }
 }
 
