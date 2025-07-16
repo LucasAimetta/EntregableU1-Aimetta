@@ -1,25 +1,31 @@
 package empresa.Payment;
 
+import empresa.Utils.Result;
+
 public class PaymentManager {
     PaymentProcessor processor;
-    public boolean processPayment(double amount, String paymentProcessor){
+    Result result;
+
+    public Result processPayment(double amount, String paymentProcessor){
         if( processorConstructor(paymentProcessor)){
-
-         if(processor.processPayment(amount)){
-             return true;}
+ result = processor.processPayment(amount);
+         if(result.isSuccess()){
+             return result;}
         }
-
-         return false;
+result.setSuccess(false);
+        result.setMessage("Procesador de Pago incorrecto");
+         return result;
     }
 
-    public boolean processPaymentRefund(double amount, String paymentProcessor){
+    public Result processPaymentRefund(double amount, String paymentProcessor){
         if( processorConstructor(paymentProcessor)){
-
-            if(processor.refundPayment(amount)){
-                return true;}
+            result = processor.processPayment(amount);
+            if(result.isSuccess()){
+                return result;}
         }
-
-        return false;
+        result.setSuccess(false);
+        result.setMessage("Procesador de Pago incorrecto");
+        return result;
     }
 
 

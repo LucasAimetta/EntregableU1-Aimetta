@@ -1,5 +1,7 @@
 package empresa.Payment;
 
+import empresa.Utils.Result;
+
 public abstract class PaymentProcessor {
     public IPaymentGateway paymentGateway;
 
@@ -7,8 +9,8 @@ public abstract class PaymentProcessor {
         this.paymentGateway = paymentGateway;
     }
 
-    public abstract boolean processPayment(double amount);
-    public abstract boolean refundPayment(double amount);
+    public abstract Result processPayment(double amount);
+    public abstract Result refundPayment(double amount);
 
     public IPaymentGateway getPaymentGateway() {
         return paymentGateway;

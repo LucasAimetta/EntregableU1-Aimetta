@@ -1,5 +1,7 @@
 package empresa.Payment;
 
+import empresa.Utils.Result;
+
 public class MercadoPagoPaymentProcessor extends  PaymentProcessor{
 
 public MercadoPagoPaymentProcessor(IPaymentGateway paymentGateway){
@@ -7,27 +9,31 @@ public MercadoPagoPaymentProcessor(IPaymentGateway paymentGateway){
 }
 
     @Override
-    public boolean processPayment(double amount) {
-
+    public Result processPayment(double amount) {
+Result result = new Result();
     if(this.paymentGateway.authorize(amount)){
-        System.out.println("Se ha autorizado el Pago");
+        result.setMessage("Se ha autorizado el Pago");
         this.paymentGateway.capture();
-        return true;
+        result.setSuccess(true);
+        return result;
     }
-    System.out.println("Ha ocurrido un error. No se autorizó el pago");
-        return false;
+result.setMessage("Ha ocurrido un error. No se autorizó el pago");
+    result.setSuccess(false);
+  return result;
     }
 
     @Override
-    public boolean refundPayment(double amount) {
-
+    public Result refundPayment(double amount) {
+        Result result = new Result();
         if(this.paymentGateway.authorize(amount)){
-            System.out.println("Se ha devuelto el Pago");
+            result.setMessage("Se ha devuelto el Pago");
             this.paymentGateway.capture();
-            return true;
+            result.setSuccess(true);
+            return result;
         }
-        System.out.println("Ha ocurrido un error. No se devolvió el pago");
-        return false;
+result.setMessage("Ha ocurrido un error. No se devolvió el pago");
+        result.setSuccess(false);
+        return result;
     }
 
 }
