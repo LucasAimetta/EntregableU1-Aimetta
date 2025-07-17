@@ -39,6 +39,7 @@ public ShippingCalculator(){}
     }
 
     public double calculateCost(){
-    return shippingStrategy.calculateCost(weight,dimentions,origin,destiny);
+    return shippingStrategy.calculateCost(weight,dimentions,origin,destiny); //Una vez asignamos que estrategia utilizaremos, pasandola por parametro
+                                                                            //Llamamos al metodo calculateCost, propio de cada estrategia y devolvemos el costo
     }
 }

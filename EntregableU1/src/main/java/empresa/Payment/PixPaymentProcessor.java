@@ -12,12 +12,12 @@ public class PixPaymentProcessor extends PaymentProcessor{
     public Result processPayment(double amount) {
         Result result = new Result();
         if(this.paymentGateway.authorize(amount)){
-            result.setMessage("Se ha autorizado el Pago");
+            result.setMessage("Se ha autorizado el Pago"); //LLAMA AL GATEWAY DE PIX, Y DE AHI PRIMERO EJECUTAMOS EL METODO DE AUTORIZAR Y SI LO HACE REALIZAMOS EL PAGO
             this.paymentGateway.capture();
             result.setSuccess(true);
             return result;
         }
-        result.setMessage("Ha ocurrido un error. No se autorizó el pago");
+        result.setMessage("Ha ocurrido un error. No se autorizó el pago"); //MISMA LOGICA QUE EN EL PROCESAMIENTO DE UN PAGO
         result.setSuccess(false);
         return result;
     }

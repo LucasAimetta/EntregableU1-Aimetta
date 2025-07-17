@@ -11,7 +11,7 @@ public MercadoPagoPaymentProcessor(IPaymentGateway paymentGateway){
     @Override
     public Result processPayment(double amount) {
 Result result = new Result();
-    if(this.paymentGateway.authorize(amount)){
+    if(this.paymentGateway.authorize(amount)){                      //LLAMA AL GATEWAY DE MERCADO PAGO, Y DE AHI PRIMERO EJECUTAMOS EL METODO DE AUTORIZAR Y SI LO HACE REALIZAMOS EL PAGO
         result.setMessage("Se ha autorizado el Pago");
         this.paymentGateway.capture();
         result.setSuccess(true);
@@ -26,7 +26,7 @@ result.setMessage("Ha ocurrido un error. No se autorizó el pago");
     public Result refundPayment(double amount) {
         Result result = new Result();
         if(this.paymentGateway.authorize(amount)){
-            result.setMessage("Se ha devuelto el Pago");
+            result.setMessage("Se ha devuelto el Pago");        //MISMA LOGICA QUE EN EL PROCESAMIENTO DE UN PAGO
             this.paymentGateway.capture();
             result.setSuccess(true);
             return result;

@@ -10,8 +10,8 @@ public class PaymentManager {
         if( processorConstructor(paymentProcessor)){
  result = processor.processPayment(amount);
          if(result.isSuccess()){
-             return result;}
-        }
+             return result;}                                // SI SE PUDO ASIGNAR EL PROCESADOR, SE INVOCA A SU METODO DE PROCESAR
+        }                                                   //SI NO SE PUDO ASIGNAR DEVUELVE ERROR
         result = new Result();
 result.setSuccess(false);
         result.setMessage("Procesador de Pago incorrecto");
@@ -22,7 +22,8 @@ result.setSuccess(false);
         if( processorConstructor(paymentProcessor)){
             result = processor.refundPayment(amount);
             if(result.isSuccess()){
-                return result;}
+                return result;} // SI SE PUDO ASIGNAR EL PROCESADOR, SE INVOCA A SU METODO DE PROCESAR
+                                                          //SI NO SE PUDO ASIGNAR DEVUELVE ERROR
         }
         result = new Result();
         result.setSuccess(false);
@@ -33,8 +34,9 @@ result.setSuccess(false);
 
 
     private boolean processorConstructor(String payment){
-
-        switch (payment.toLowerCase()){
+                                                                // PASADO UN STRING QUE INDICA EL PROCESADOR
+                                                                //ASIGNA A LA VARIABLE PROCESSOR EL PROCESADOR CORRESPONDIENTE
+        switch (payment.toLowerCase()){                            // SI EL STRING NO CORRESPONDE A NINGUN PROCESADOR DEVUELVE ERROR
             case "pix": processor = new PixPaymentProcessor(new PixPaymentGateway());return true;
 
             case "mercadopago":  processor = new MercadoPagoPaymentProcessor(new MercadoPagoPaymentGateway());return true;

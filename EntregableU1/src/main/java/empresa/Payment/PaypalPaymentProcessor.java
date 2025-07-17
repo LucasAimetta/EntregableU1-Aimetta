@@ -15,7 +15,7 @@ public class PaypalPaymentProcessor extends PaymentProcessor {
         if(this.paymentGateway.authorize(amount)){
             result.setMessage("Se ha autorizado el Pago");
             this.paymentGateway.capture();
-            result.setSuccess(true);
+            result.setSuccess(true);  //LLAMA AL GATEWAY DE PAYPAL, Y DE AHI PRIMERO EJECUTAMOS EL METODO DE AUTORIZAR Y SI LO HACE REALIZAMOS EL PAGO
             return result;
         }
         result.setMessage("Ha ocurrido un error. No se autorizó el pago");
@@ -27,7 +27,7 @@ public class PaypalPaymentProcessor extends PaymentProcessor {
     public Result refundPayment(double amount) {
         Result result = new Result();
         if(this.paymentGateway.authorize(amount)){
-            result.setMessage("Se ha devuelto el Pago");
+            result.setMessage("Se ha devuelto el Pago"); //MISMA LOGICA QUE EN EL PROCESAMIENTO DE UN PAGO
             this.paymentGateway.capture();
             result.setSuccess(true);
             return result;

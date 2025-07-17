@@ -16,20 +16,20 @@ public class Main {
 static Result resultado = new Result();
     public static void main(String[] args) {
 
-        while (continuar){
+        while (continuar){  //Crea un bucle que itera siempre y cuando continuar sea true
 
 mostarAcciones();
-int accion = Integer.parseInt(scanner.nextLine());
+int accion = Integer.parseInt(scanner.nextLine()); //Muestra el menu de acciones y scanea la accion que el usuario quiere realizar
 switch (accion){
     case 1:
-        CompletableFuture
-                .supplyAsync(()->procesarPago())
-                .thenAccept(result -> System.out.println(result.getMessage()))
-                .join();
+        CompletableFuture                               //para lograr paralelismo
+                .supplyAsync(()->procesarPago())        //SupplyAsync ejecuta la tarea en otro hilo
+                .thenAccept(result -> System.out.println(result.getMessage()))      //ThenAccept, recoge el return e imprime por consola el mensaje
+                .join();                                // Join, bloquea el hilo principal hasta que se complete toda la cadena anterior, asi aseguramos que el programa no termine antes de imprimir el mensaje
         break;
     case 2:
         CompletableFuture
-                .supplyAsync(()->procesarReembolzo())
+                .supplyAsync(()->procesarReembolso())
                 .thenAccept(result -> System.out.println(result.getMessage()))
                 .join();
         break;
@@ -40,7 +40,7 @@ switch (accion){
                 .thenAccept( costo->System.out.println("El costo del envio es $"+ costo))
                 .join();
         break;
-    case 4:continuar=false;break;
+    case 4:continuar=false;break;       //Si quiere salir, ponemos continuar en falso y termina el while
 
 
 }
@@ -50,7 +50,7 @@ switch (accion){
 
 
     }
-private static void mostarAcciones(){
+private static void mostarAcciones(){               //Este metodo, se utiliza como menu, indicanco las diferentes acciones que pueden realizarse
         System.out.println("¿Que desea realizar?");
     System.out.println("1= Procesar Pago");
     System.out.println("2= Procesar Reembolzo");
@@ -59,8 +59,8 @@ private static void mostarAcciones(){
     }
 
     private static Result procesarPago(){
-        System.out.println("Ingrese el monto: ");
-        double amount = Integer.parseInt(scanner.nextLine());
+        System.out.println("Ingrese el monto: ");               //Metodo que realiza el procesamiento de un pago
+        double amount = Integer.parseInt(scanner.nextLine());   //Solicita datos por pantalla, para enviarlo como parametro cuando ejecutemos metodos
 
         System.out.println("1. mercado pago ");
         System.out.println("2. pix ");
@@ -75,12 +75,12 @@ private static void mostarAcciones(){
              default: System.out.println("Ha ingresado un numero incorrecto");break;
          }
         Result result = logicaPayment.processPayment(amount,processorString);
-         return result;
+         return result;//Invoca el metodo y devuelve el objeto Result, que nos devolvio
     }
 
-    private static Result procesarReembolzo(){
-        System.out.println("Ingrese el monto: ");
-        double amount = Integer.parseInt(scanner.nextLine());
+    private static Result procesarReembolso(){
+        System.out.println("Ingrese el monto: ");       //Metodo que realiza el reembolso de un pago
+        double amount = Integer.parseInt(scanner.nextLine());       //Al igual que el procesamiento de un pago, solicita datos para enviarlos como parametros en la ejecucion del metodo
 
         System.out.println("1. mercado pago ");
         System.out.println("2. pix ");
@@ -95,13 +95,13 @@ private static void mostarAcciones(){
             default: System.out.println("Ha ingresado un numero incorrecto");break;
         }
         Result result = logicaPayment.processRefund(amount,processorString);
-        return result;
+        return result;  //Invoca el metodo y devuelve el objeto Result, que nos devolvio
     }
 
     private static Double calcularCosto(){
 
-        System.out.println("1. Barco ");
-        System.out.println("2. Camion ");
+        System.out.println("1. Barco ");        //Metodo que calcula el costo del envio
+        System.out.println("2. Camion ");       //Solicita datos, estos seran usados como parametros en la ejecucion del metodo calculateCost
         System.out.println("3. Avion ");
         System.out.println("Ingrese el metodo de envio ");
         int envio = Integer.parseInt(scanner.nextLine());
@@ -144,7 +144,7 @@ private static void mostarAcciones(){
         logicaShipping.setOrigin(coordenadas);
         logicaShipping.setDestiny(coordenadasDestino);
         double costo = logicaShipping.calculateCost();
-return costo;
+return costo;   //Invoca al metodo y devuelve el costo que el metodo nos devolvio
     }
 
 

@@ -11,7 +11,7 @@ public class DistanceCalculator {
 
         double dLat = lat2 - lat1;
         double dLon = lon2 - lon1;
-
+                                                    //APLICAMOS LA Fórmula de Haversine PARA DEVOLVER LA DISTANCIA EN KMS ENTRE DOS COORDENADAS
         double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
                 + Math.cos(lat1) * Math.cos(lat2)
                 * Math.sin(dLon / 2) * Math.sin(dLon / 2);

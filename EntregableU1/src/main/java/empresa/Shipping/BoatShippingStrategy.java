@@ -5,7 +5,10 @@ public class BoatShippingStrategy implements IShippingStrategy{
     public double calculateCost(double weight, double dimensiones, Coordinates coordinatesOrigin, Coordinates coordinatesDestiny) {
         double totalCost=25000;
         if(weight>300){
-            totalCost=totalCost*1.3;
+            totalCost=totalCost*1.3;        //SIMULA UNA LOGICA DONDE EL COSTO VA A VARIAR DEPENDIENDO DE:
+                                            // SI EL PESO ES MAYOR A 300G
+                                            // LAS DIMENSIONES MAYORES A 5000CM3
+                                            // LA DISTANCIA MENOR A 1000KM, ENTRE 1000 Y 2000KM Y MAYOR A 2000KM
         }else{
             totalCost=totalCost*1.1;
         }
