@@ -13,10 +13,12 @@ public class BoatShippingStrategy implements IShippingStrategy{
         if(dimensiones<5000){
             totalCost=totalCost*1.2;
         }else{totalCost=totalCost*1.5;}
+
         DistanceCalculator calculator = new DistanceCalculator();
-        if(calculator.distanceInKilometers(coordinatesOrigin,coordinatesDestiny)>1000){
+        double distance = calculator.distanceInKilometers(coordinatesOrigin,coordinatesDestiny);
+        if(distance<1000){
             totalCost+=10000;
-        } else if (calculator.distanceInKilometers(coordinatesOrigin,coordinatesDestiny)>5000) {
+        } else if (distance<2000) {
             totalCost+=15000;
         }else {
             totalCost+=20000;

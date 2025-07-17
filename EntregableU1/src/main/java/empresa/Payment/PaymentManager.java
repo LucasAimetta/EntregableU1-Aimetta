@@ -12,17 +12,19 @@ public class PaymentManager {
          if(result.isSuccess()){
              return result;}
         }
+        result = new Result();
 result.setSuccess(false);
         result.setMessage("Procesador de Pago incorrecto");
          return result;
     }
 
-    public Result processPaymentRefund(double amount, String paymentProcessor){
+    public Result processRefund(double amount, String paymentProcessor){
         if( processorConstructor(paymentProcessor)){
-            result = processor.processPayment(amount);
+            result = processor.refundPayment(amount);
             if(result.isSuccess()){
                 return result;}
         }
+        result = new Result();
         result.setSuccess(false);
         result.setMessage("Procesador de Pago incorrecto");
         return result;
@@ -39,7 +41,7 @@ result.setSuccess(false);
 
             case "paypal": processor = new PaypalPaymentProcessor(new PaypalPaymentGateway());return true;
 
-            default: System.out.println("Procesador de Pago incorrecto"); return false;
+            default: return false;
         }}
 
 

@@ -13,10 +13,13 @@ public class AirShippingStrategy implements  IShippingStrategy{
        if(dimensiones<5000){
            totalCost=totalCost*1.2;
        }else{totalCost=totalCost*1.7;}
+
+
         DistanceCalculator calculator = new DistanceCalculator();
-        if(calculator.distanceInKilometers(coordinatesOrigin,coordinatesDestiny)>1000){
+       double distance = calculator.distanceInKilometers(coordinatesOrigin,coordinatesDestiny);
+        if(distance<1000){
             totalCost+=7000;
-        } else if (calculator.distanceInKilometers(coordinatesOrigin,coordinatesDestiny)>2000) {
+        } else if (distance<2000) {
             totalCost+=10000;
         }else {
             totalCost+=15000;

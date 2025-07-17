@@ -14,9 +14,10 @@ public class TruckShippingStrategy implements  IShippingStrategy{
             totalCost=totalCost*1.4;
         }else{totalCost=totalCost*1.8;}
         DistanceCalculator calculator = new DistanceCalculator();
-        if(calculator.distanceInKilometers(coordinatesOrigin,coordinatesDestiny)>1000){
+        double distance = calculator.distanceInKilometers(coordinatesOrigin,coordinatesDestiny);
+        if(distance<1000){
             totalCost+=5000;
-        } else if (calculator.distanceInKilometers(coordinatesOrigin,coordinatesDestiny)>2000) {
+        } else if (distance<2000) {
             totalCost+=8000;
         }else {
             totalCost+=12000;
